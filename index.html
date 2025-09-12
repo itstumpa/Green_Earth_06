@@ -28,9 +28,9 @@
 
   </head>
   <body class="bg-[#F0FDF4]">
-    <header class="">
+    <header class="bg-[#15803D]">
   <!--- navbar -->
-<div class=" navbar bg-[#15803D] md:text-white shadow-sm md:px-30 pr-2">
+<div class=" navbar w-11/12 mx-auto md:text-white shadow-sm p-2">
   <div class="navbar-start">
     <div class="dropdown">
       <div tabindex="0" role="button" class="btn btn-ghost text-white lg:hidden">
@@ -61,7 +61,7 @@
 </header>
 <!--- section 1-hero -->
 <section>
-<div class="bg-[#CFF0DC] relative h-[220px] md:h-[320px] text-center items-center flex flex-col justify-center">
+<div class="bg-[#CFF0DC]  relative h-[220px] md:h-[320px] text-center items-center flex flex-col justify-center">
   <h1 class="text-2xl lg:text-4xl font-bold mb-3 text-[#1E1E1E]">Plant a Tree, Grow a Future</h1>
   <p class="mb-6 text-[14px] lg:text-[18px] md:w-[650px] text-[#777777] font-normal">Join our mission to plant 1 million trees and make the Earth greener for future
 generations.</p>
@@ -91,7 +91,7 @@ generations.</p>
 
   <!-- Trees -->
   <div class="md:col-span-4">
-    <h2 id="category-title" class="text-2xl font-semibold text-[#1E1E1E] mb-6">Choose Your Trees</h2>
+    <h2 id="category-title" class="text-2xl font-semibold text-[#1E1E1E] text-center mb-6">Choose Your Trees</h2>
     <div id="trees" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
   </div>
 
@@ -104,14 +104,16 @@ generations.</p>
     </div>
   </div>
 
-  <!-- DaisyUI Modal -->
-  <input type="checkbox" id="tree-modal" class="modal-toggle" />
-  <div class="modal">
-    <div class="modal-box relative max-w-lg max-h-[90vh] overflow-y-auto">
-      <label for="tree-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-      <div id="modal-content"></div>
-    </div>
+  <!-- DaisyUI Dialog Modal -->
+<dialog id="tree-modal" class="modal">
+  <div class="modal-box relative max-w-lg max-h-[90vh] overflow-y-auto">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+    </form>
+    <div id="modal-content"></div>
   </div>
+</dialog>
+
   
 </section>
 <!--- section 3-About the Campaign -->

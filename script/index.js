@@ -45,7 +45,7 @@ function loadAllPlants() {
       console.error(err);
     });
 }
-
+// fixme
 // Load trees by category
 function loadTreesByCategory(categoryId, categoryName) {
   categoryTitle.textContent = `Trees in "${categoryName}"`;
@@ -85,13 +85,22 @@ function renderTrees(trees) {
     treesContainer.appendChild(div);
   });
 }
-
-// Show modal
+// fixme
+/// Show modal
 function showTreeModal(treeId) {
   fetch(`https://openapi.programming-hero.com/api/plant/${treeId}`)
     .then(res => res.json())
     .then(data => {
-      const tree = data.plant;
+      console.log(data); // 🔎 see the real response
+
+      // adjust this depending on API structure
+      const tree = data.plants;  
+
+      if (!tree) {
+        console.error("No tree data found");
+        return;
+      }
+
       const modalContent = document.getElementById("modal-content");
       modalContent.innerHTML = `
         <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
@@ -105,10 +114,15 @@ function showTreeModal(treeId) {
           <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg">Add to Cart</button>
         </div>
       `;
-      document.getElementById("tree-modal").checked = true;
+
+      document.getElementById("tree-modal").showModal();
     })
+    
     .catch(err => console.error(err));
+
 }
+ 
+
 
 // Cart functions
 
