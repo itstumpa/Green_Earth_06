@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- title and logo -->
     <title>English</title>
-    <link rel="stylesheet" href="./assets/logo.png" />
     <!-- font awesome  -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- font integration  -->
@@ -83,29 +82,38 @@ generations.</p>
 
 
 <!--- section 2-Choose Your Trees -->
-<section>
-  <div class="w-11/12 mx-auto md:flex mt-10 md:mt-24 gap-6">
-
-    <!-- Left Sidebar for Categories -->
-    <div class="w-full md:w-1/6 bg-[#F0FDF4] p-4 rounded-lg shadow">
-      <h3 class="text-lg font-semibold mb-4 text-[#1E1E1E]">Categories</h3>
-      <ul id="categories" class="space-y-2 text-[#1E1E1E]">
-        <!-- Categories will load here -->
-      </ul>
-    </div>
-
-    <!-- Right Content Area -->
-    <div class="w-full md:w-3/4">
-      <h2 class="text-2xl font-semibold text-[#1E1E1E] mb-4">Choose Your Trees</h2>
-      <div id="trees" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- Trees content goes here -->
-      </div>
-    </div>
-
+<section class="w-11/12 mx-auto mt-10 md:mt-24 grid md:grid-cols-6 gap-6">
+  <!-- Categories -->
+  <div class="md:col-span-1 bg-[#F0FDF4] p-4 rounded-lg shadow">
+    <h3 class="text-lg font-semibold mb-4 text-[#1E1E1E]">Categories</h3>
+    <ul id="categories" class="space-y-2 text-[#1E1E1E]"></ul>
   </div>
+
+  <!-- Trees -->
+  <div class="md:col-span-4">
+    <h2 id="category-title" class="text-2xl font-semibold text-[#1E1E1E] mb-6">Choose Your Trees</h2>
+    <div id="trees" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+  </div>
+
+  <!-- Cart -->
+  <div class="md:col-span-1 bg-[#F0FDF4] p-4 rounded-lg shadow">
+    <h3 class="text-lg font-semibold mb-4 text-[#1E1E1E]">Cart</h3>
+    <ul id="cart-items" class="space-y-2"></ul>
+    <div class="mt-4 font-bold text-[#1E1E1E]">
+      Total: ৳ <span id="cart-total">0</span>
+    </div>
+  </div>
+
+  <!-- DaisyUI Modal -->
+  <input type="checkbox" id="tree-modal" class="modal-toggle" />
+  <div class="modal">
+    <div class="modal-box relative max-w-lg max-h-[90vh] overflow-y-auto">
+      <label for="tree-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+  
 </section>
-
-
 <!--- section 3-About the Campaign -->
 <section>
 <div class="w-11/12 mx-auto mb-10">
