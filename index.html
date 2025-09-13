@@ -30,7 +30,7 @@
   <body class="bg-[#F0FDF4]">
     <header class="bg-[#15803D]">
   <!--- navbar -->
-<div class=" navbar w-11/12 mx-auto md:text-white shadow-sm p-2">
+<div class=" navbar w-11/12 mx-auto md:text-white shadow-sm">
   <div class="navbar-start">
     <div class="dropdown">
       <div tabindex="0" role="button" class="btn btn-ghost text-white lg:hidden">
@@ -66,7 +66,6 @@
   <p class="mb-6 text-[14px] lg:text-[18px] md:w-[650px] text-[#777777] font-normal">Join our mission to plant 1 million trees and make the Earth greener for future
 generations.</p>
   <div class="navbar-end text-center items-center justify-center">
-        <a class="btn rounded-full text-[#15803D] bg-[#FACC15] text-sm md:text-lg font-normal hover:bg-yellow-500 transition">Plant a Tree</a>
 
     <a class="btn rounded-full text-[#15803D] bg-[#FACC15] text-sm md:text-lg font-normal hover:bg-yellow-500 transition">
   Get Involved
@@ -84,16 +83,17 @@ generations.</p>
 
 <!--- section 2-Choose Your Trees -->
 <section class="w-11/12 mx-auto mt-10 md:mt-24 grid md:grid-cols-6 gap-6">
-  <div id="alert-container" class="fixed top-5 right-5 z-50"></div>
+  <!-- alert  -->
+  <!-- <div id="alert-container" class="fixed top-5 right-5 z-50"></div> -->
 
   <!-- Categories -->
-  <div class="md:col-span-1 bg-[#F0FDF4] p-4 rounded-lg shadow">
-    <h3 class="text-lg font-semibold mb-4 text-[#1E1E1E]">Categories</h3>
+  <div class="md:col-span-2 lg:col-span-1 bg-[#F0FDF4] p-4 rounded-lg shadow">
+    <h3 class="text-lg font-semibold mb-4 text-[#1E1E1E] text-center md:text-left">Categories</h3>
     <ul id="categories" class="space-y-2 text-[#1E1E1E]"></ul>
   </div>
 
   <!-- Trees -->
-  <div class="md:col-span-4">
+  <div class="md:col-span-3 lg:col-span-4">
     <h2 id="category-title" class="text-2xl font-semibold text-[#1E1E1E] text-center mb-6">Choose Your Trees</h2>
     <div id="trees" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
   </div>

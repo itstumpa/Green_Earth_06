@@ -1,64 +1,60 @@
-// DOM 
+// Dom 
 const categoriesList = document.getElementById('categories');
 const treesContainer = document.getElementById('trees');
 const categoryTitle = document.getElementById('category-title');
 const cartItems = document.getElementById('cart-items');
 const cartTotal = document.getElementById('cart-total');
-const treeModal = document.getElementById("tree-modal");
-const modalContent = document.getElementById("modal-content");
-
 
 let cart = [];
-let allPlants = [];
-let activeCategory = null;
 
-// loading spinner
-const showLoading = (container) =>
-  (container.innerHTML = `<span class="loading loading-bars loading-sm"></span>`);
+// Loading spinner
+function showLoading(container) {
+  container.innerHTML = `<span class="loading loading-bars loading-sm"></span>`;
+}
 
 // Fetch & render categories
 fetch('https://openapi.programming-hero.com/api/categories')
   .then(res => res.json())
   .then(data => {
+    const categories = data.categories;
     categoriesList.innerHTML = '';
-    data.categories.forEach(cat => {
+    categories.forEach(cat => {
       const btn = document.createElement('button');
       btn.textContent = cat.category_name;
-      btn.className = "block w-full text-left cursor-pointer p-2 rounded hover:bg-[#15803D] hover:text-white transition";
+      btn.className = "block w-full text-center md:text-left cursor-pointer p-2 rounded hover:bg-[#15803D] hover:text-white transition";
       btn.addEventListener('click', () => {
-        activeCategory = cat.category_name;
         Array.from(categoriesList.children).forEach(c => c.classList.remove('bg-[#15803D]', 'text-white'));
         btn.classList.add('bg-[#15803D]', 'text-white');
         loadTreesByCategory(cat.category_name);
       });
       categoriesList.appendChild(btn);
     });
-  })
-  .catch(console.error);
+  });
 
-// Fetch all plants once
+// Load all plants
 function loadAllPlants() {
   showLoading(treesContainer);
   fetch("https://openapi.programming-hero.com/api/plants")
     .then(res => res.json())
-    .then(data => {
-      allPlants = data.plants || [];
-      renderTrees(allPlants);
-    })
-    .catch(err => {
-      treesContainer.textContent = 'Failed to load trees.';
-      console.error(err);
-    });
+    .then(data => renderTrees(data.plants || []))
+    .catch(err => treesContainer.textContent = 'Failed to load trees.');
 }
 
-// Filter plants locally by category
+// Load trees by category
 function loadTreesByCategory(categoryName) {
   categoryTitle.textContent = `Trees in "${categoryName}"`;
   showLoading(treesContainer);
-  renderTrees(allPlants.filter(p => p.category === categoryName));
+  fetch("https://openapi.programming-hero.com/api/plants")
+    .then(res => res.json())
+    .then(data => {
+      const filtered = data.plants.filter(p => p.category === categoryName);
+      renderTrees(filtered);
+    })
+    .catch(err => treesContainer.textContent = 'Failed to load trees.');
 }
 
 // Render tree cards
+cartItems.parentElement.style.backgroundColor = "white";
 function renderTrees(trees) {
   treesContainer.innerHTML = '';
   trees.forEach(tree => {
@@ -74,65 +70,69 @@ function renderTrees(trees) {
       </div>
       <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg">Add to Cart</button>
     `;
-
-    // Open modal
     div.querySelector('h3').addEventListener('click', () => showTreeModal(tree));
-
-    // Add to cart
     div.querySelector('button').addEventListener('click', () => addToCart(tree));
-
     treesContainer.appendChild(div);
   });
 }
 
-// tree modal
+// Dynamic alert
+  // note active later 
+
+// function showAlert(message) {
+//   const alertDiv = document.createElement('div');
+//   alertDiv.textContent = message;
+//   alertDiv.className = "fixed bottom-5 right-7 bg-red-500 text-white p-2 rounded shadow animate-fade-in-out";
+//   document.body.appendChild(alertDiv);
+//   setTimeout(() => alertDiv.remove(), 2000);
+// }
+
+
+// Show modal
 function showTreeModal(tree) {
+  const modalContent = document.getElementById("modal-content");
   modalContent.innerHTML = `
-    <div class="transition">
-      <h3 class="font-bold text-[#1E1E1E] text-xl mb-3">${tree.name}</h3>
-      <img src="${tree.image}" alt="${tree.name}" class="w-full h-48 object-cover rounded mb-3" />
-      <div class="flex flex-col my-2">
-        <span class="rounded-full text-sm text-[#1E1E1E]"><b>Category:</b> ${tree.category}</span>
-        <span class="mt-2 text-[#1E1E1E]"><b>Price:</b> ৳ ${tree.price}</span>
-      </div>
-      <p class="text-sm mb-2 line-clamp-4"><b>Description:</b> ${tree.description}</p>
-      <div class="flex justify-between mt-3">
-        <button id="modal-add-cart" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Add to Cart</button>
-        <form method="dialog"><button class="btn">Close</button></form>
-      </div>
+    <h3 class="font-bold text-[#1E1E1E] text-xl mb-3">${tree.name}</h3>
+    <img src="${tree.image}" alt="${tree.name}" class="w-full h-48 object-cover rounded mb-3" />
+    <div class="flex flex-col  my-2">
+      <span class="rounded-full text-sm text-[#1E1E1E]"><span class="font-semibold">Category: </span>${tree.category}</span>
+      <span class="mt-2 text-[#1E1E1E]"><span class="font-semibold">Price: </span>৳ ${tree.price}</span>
+    </div>
+    <p class="text-sm mb-2 line-clamp-4"><span class="font-semibold">Description: </span>${tree.description}</p>
+    <div class="flex justify-between gap-2 mt-3">
+      <button id="modal-add" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Add to Cart</button>
+      <button onclick="document.getElementById('tree-modal').close()" class="bg-gray-400 hover:bg-gray-500 text-white py-2 px-4 rounded-lg">Close</button>
     </div>
   `;
-  treeModal.showModal();
+  document.getElementById("tree-modal").showModal();
 
-  // Add to cart from modal
-  document.getElementById('modal-add-cart').addEventListener('click', () => addToCart(tree));
+  document.getElementById("modal-add").addEventListener('click', () => addToCart(tree));
 }
 
-
-
-
-
-// from page Add to cart
+// Cart functions
 function addToCart(tree) {
   const item = cart.find(i => i.id === tree.id);
   item ? item.quantity++ : cart.push({ ...tree, quantity: 1 });
   renderCart();
+    // note delete later 
+   alert(`${tree.name} has been added to the cart!`);
+  // note active later 
+  // showAlert(`${tree.name} has been added to the cart!`);
 }
 
-// Remove from cart
 function removeFromCart(treeId) {
-  const item = cart.find(i => i.id === treeId);
-  if (!item) return;
-  item.quantity > 1 ? item.quantity-- : cart.splice(cart.indexOf(item), 1);
+  const index = cart.findIndex(i => i.id === treeId);
+  if (index > -1) {
+    cart[index].quantity > 1 ? cart[index].quantity-- : cart.splice(index, 1);
+  }
   renderCart();
+   
+
 }
 
-// Render cart
-cartItems.parentElement.style.backgroundColor = "white";
 function renderCart() {
   cartItems.innerHTML = '';
   let total = 0;
-
   cart.forEach(item => {
     total += item.price * item.quantity;
     const div = document.createElement('div');
@@ -147,9 +147,9 @@ function renderCart() {
     div.querySelector('span').addEventListener('click', () => removeFromCart(item.id));
     cartItems.appendChild(div);
   });
-
   cartTotal.textContent = total;
 }
 
-// Run default
+
+// Run
 document.addEventListener('DOMContentLoaded', loadAllPlants);
