@@ -79,13 +79,13 @@ function renderTrees(trees) {
 // Dynamic alert
   // note active later 
 
-// function showAlert(message) {
-//   const alertDiv = document.createElement('div');
-//   alertDiv.textContent = message;
-//   alertDiv.className = "fixed bottom-5 right-7 bg-red-500 text-white p-2 rounded shadow animate-fade-in-out";
-//   document.body.appendChild(alertDiv);
-//   setTimeout(() => alertDiv.remove(), 2000);
-// }
+function showAlert(message) {
+  const alertDiv = document.createElement('div');
+  alertDiv.textContent = message;
+  alertDiv.className = "fixed bottom-5 right-7 bg-red-500 text-white p-2 rounded shadow animate-fade-in-out";
+  document.body.appendChild(alertDiv);
+  setTimeout(() => alertDiv.remove(), 2000);
+}
 
 
 // Show modal
@@ -115,9 +115,9 @@ function addToCart(tree) {
   item ? item.quantity++ : cart.push({ ...tree, quantity: 1 });
   renderCart();
     // note delete later 
-   alert(`${tree.name} has been added to the cart!`);
+  //  alert(`${tree.name} has been added to the cart!`);
   // note active later 
-  // showAlert(`${tree.name} has been added to the cart!`);
+  showAlert(`${tree.name} has been added to the cart!`);
 }
 
 function removeFromCart(treeId) {
