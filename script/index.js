@@ -150,6 +150,5 @@ function renderCart() {
   cartTotal.textContent = total;
 }
 
-
 // Run
 document.addEventListener('DOMContentLoaded', loadAllPlants);

@@ -95,6 +95,22 @@ https://openapi.programming-hero.com/api/plant/1
 
 #### 5) Explain template literals in ES6. How are they different from string concatenation?
 
+
+qs 1) Var, let, const:
+Var is old and works in functions, let is for variables I can change, const is for values that don’t change.
+
+qs 2) Map, forEach, filter:
+Map makes a new array, forEach just loops through, and filter gives a new array with only the items I want.
+
+qs 3) Arrow functions:
+Arrow functions are short functions using => and they don’t have their own this.
+
+qs 4) Destructuring:
+Destructuring is a way to take values from arrays or objects and put them in variables.
+
+qs 5) Template literals:
+Template literals use backticks and let me put variables inside strings with ${}. It’s easier than adding strings with +.
+
 ## ⚙️ Functionalities 
 
 1) Category Loading 
