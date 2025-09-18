@@ -77,7 +77,6 @@ function renderTrees(trees) {
 }
 
 // Dynamic alert
-  // note active later 
 
 function showAlert(message) {
   const alertDiv = document.createElement('div');
@@ -114,9 +113,7 @@ function addToCart(tree) {
   const item = cart.find(i => i.id === tree.id);
   item ? item.quantity++ : cart.push({ ...tree, quantity: 1 });
   renderCart();
-    // note delete later 
-  //  alert(`${tree.name} has been added to the cart!`);
-  // note active later 
+  
   showAlert(`${tree.name} has been added to the cart!`);
 }
 
